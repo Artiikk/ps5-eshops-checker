@@ -57,6 +57,9 @@ app.listen(PORT, '0.0.0.0', () => {
     webSitesUrl.forEach(async ({ url, name, expectedPath, expectedText }) => {
       const element = await getElement(url, expectedPath)
 
+      console.log('element', element)
+      console.log('expectedText', expectedText)
+
       if (element !== expectedText) {
         sendUpdate(name, url)
       }
