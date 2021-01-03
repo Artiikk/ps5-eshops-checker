@@ -26,7 +26,7 @@ const webSitesUrl = [
     url: 'https://www.moyo.ua/igrovaya_pristavka_playstation_5_digital_edition_pervaya_postavka_/475056.html',
     name: 'moyo',
     expectedPath: '#main-product > div.tovar-tabs > div.tovar-tabs-content-list > ul > li.tovar-tabs-content.tovar-main-tab-content.tovar-tabs-content--active > div.tovar_maininfo > div.tovar_info.tovar-status-type--archive > div.tovar-info-price.tovar-info-price--archive.Roboto.tovar-info-price--without-pre-order-start-date > div.tovar-info-price-header > div',
-    expectedText: 'Товар закончилсяz'
+    expectedText: 'Товар закончился'
   }
 ];
 
