@@ -60,7 +60,7 @@ app.listen(PORT, '0.0.0.0', () => {
       console.log(`${name} ${element}`, element)
       console.log(`${name} ${expectedText}`, expectedText)
 
-      if (element !== expectedText) {
+      if (element && (element !== expectedText)) {
         sendUpdate(name, url)
       }
     });
