@@ -5,7 +5,7 @@ const puppeteer = require('puppeteer');
 const schedule = require('node-schedule');
 const TelegramBot = require('node-telegram-bot-api');
 const TelegramBotToken = process.env.BOT_TOKEN;
-const bot = new TelegramBot(TelegramBotToken, { polling: true });
+const bot = new TelegramBot(TelegramBotToken, { polling: { interval: 1000 } });
 const CHAT_ID = process.env.CHAT_ID;
 const PORT = process.env.PORT || 5000;
 
@@ -30,18 +30,32 @@ const webSitesUrl = [
   }
 ];
 
-async function getElement(url, expectedPath) {
+async function getElement(url, expectedPath, expectedText) {
   try {
-    const browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] })
+    const browser = await puppeteer.launch({
+      headless: true,
+      args: [
+        '--no-sandbox',
+        '--disable-setuid-sandbox',
+        '--disable-dev-shm-usage'
+      ]
+    })
     const page = await browser.newPage()
-    await page.goto(url)
-    const element = await page.$eval(expectedPath, el => el.textContent);
+    try {
+      await page.goto(url, { waitUntil: 'load', timeout: 20000 })
+      const element = await page.$eval(expectedPath, el => el.textContent);
 
-    await page.close()
-    return element.trim()
+      await page.close()
+      await browser.close()
+      return element.trim()
+    } catch(e) {
+      await page.close()
+      await browser.close()
+      return expectedText
+    }
   } catch (e) {
     console.log(e)
-  }
+  };
 };
 
 const sendUpdate = (name, url) => {
@@ -52,17 +66,28 @@ const sendUpdate = (name, url) => {
   );
 };
 
+async function urlChecker({ url, name, expectedPath, expectedText }) {
+  const element = await getElement(url, expectedPath, expectedText)
+
+  console.log(`${name}: current: ${element} - expected: ${expectedText}`)
+
+  if (element !== expectedText) {
+    sendUpdate(name, url)
+  }
+
+  return null
+};
+
 app.listen(PORT, '0.0.0.0', () => {
-  schedule.scheduleJob(`*/1 * * * *`, () => {
-    webSitesUrl.forEach(async ({ url, name, expectedPath, expectedText }) => {
-      const element = await getElement(url, expectedPath)
-
-      console.log(`${name} ${element}`, element)
-      console.log(`${name} ${expectedText}`, expectedText)
-
-      if (element && (element !== expectedText)) {
-        sendUpdate(name, url)
-      }
-    });
+  schedule.scheduleJob(`*/1 * * * *`, async () => {
+    try {
+      await webSitesUrl.reduce(async (promise, item) => {
+        // waiting for the previous promise
+        await promise;
+        await urlChecker(item)
+      }, Promise.resolve());
+    } catch (e) {
+      console.log('error', error)
+    }
   });
 });

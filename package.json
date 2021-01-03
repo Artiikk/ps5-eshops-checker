@@ -4,6 +4,9 @@
   "main": "index.js",
   "author": "Artiikk <harfild1@ukr.net>",
   "license": "MIT",
+  "engines": {
+    "node": "14.15.4"
+  },
   "dependencies": {
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
