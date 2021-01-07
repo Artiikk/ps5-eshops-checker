@@ -30,7 +30,7 @@ const webSitesUrl = [
   }
 ];
 
-async function getElement(url, expectedPath, expectedText) {
+async function getElement(url, expectedPath, expectedText, name) {
   try {
     const browser = await puppeteer.launch({
       headless: true,
@@ -51,6 +51,8 @@ async function getElement(url, expectedPath, expectedText) {
     } catch(e) {
       await page.close()
       await browser.close()
+
+      console.log(`something crashed on ${name}, going for the next steps`)
       return expectedText
     }
   } catch (e) {
@@ -67,7 +69,7 @@ const sendUpdate = (name, url) => {
 };
 
 async function urlChecker({ url, name, expectedPath, expectedText }) {
-  const element = await getElement(url, expectedPath, expectedText)
+  const element = await getElement(url, expectedPath, expectedText, name)
 
   console.log(`${name}: current: ${element} - expected: ${expectedText}`)
 
