@@ -51,9 +51,7 @@ async function getElement(url, expectedPath, expectedText, name) {
     } catch(e) {
       await page.close()
       await browser.close()
-
-      console.log(`something crashed on ${name}, going for the next steps`)
-      return expectedText
+      return null
     }
   } catch (e) {
     console.log(e)
@@ -69,14 +67,17 @@ const sendUpdate = (name, url) => {
 };
 
 async function urlChecker({ url, name, expectedPath, expectedText }) {
-  const element = await getElement(url, expectedPath, expectedText, name)
+  const element = await getElement(url, expectedPath)
 
-  console.log(`${name}: current: ${element} - expected: ${expectedText}`)
+  if (element === null) {
+    console.error(`something crashed on ${name}, going for the next steps`)
+    return null
+  }
 
+  console.log(`${name.toUpperCase()} current: ${element} - expected: ${expectedText}`)
   if (element !== expectedText) {
     sendUpdate(name, url)
   }
-
   return null
 };
 
