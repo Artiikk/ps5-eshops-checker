@@ -14,7 +14,7 @@ const webSitesUrl = [
     url: 'https://rozetka.com.ua/playstation_5_digital_edition_2/p223596301/',
     name: 'rozetka',
     expectedPath: 'body > app-root > div > div:nth-child(2) > app-rz-product > div > product-tab-main > div:nth-child(1) > div:nth-child(1) > div.product-about__right > product-main-info > ul > li:nth-child(1) > p',
-    expectedText: 'Нет в наличии'
+    expectedText: 'Немає в наявності'
   },
   {
     url: 'https://allo.ua/ru/igrovye-pristavki/konsol-playstation-5-digital-edition.html',
@@ -30,7 +30,7 @@ const webSitesUrl = [
   }
 ];
 
-async function getElement(url, expectedPath, expectedText, name) {
+async function getElement(url, expectedPath) {
   try {
     const browser = await puppeteer.launch({
       headless: true,
@@ -78,7 +78,7 @@ async function urlChecker({ url, name, expectedPath, expectedText }) {
   if (element !== expectedText) {
     sendUpdate(name, url)
   }
-  return null
+  return element
 };
 
 app.listen(PORT, '0.0.0.0', () => {
