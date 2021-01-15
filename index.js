@@ -20,13 +20,13 @@ const webSitesUrl = [
     url: 'https://allo.ua/ru/igrovye-pristavki/konsol-playstation-5-digital-edition.html',
     name: 'allo',
     expectedPath: '#__layout > div > div.page__content.page__content--inverse > div.product-view > ul > li.product-basic-content.product-view-content__section > div.product-basic-content__data.main-data > div.main-data__trade.product-trade > div > div > p',
-    expectedText: ['Нет в наличии']
+    expectedText: ['Немає в наявності', 'Нет в наличии']
   },
   {
     url: 'https://www.moyo.ua/igrovaya_pristavka_playstation_5_digital_edition_pervaya_postavka_/475056.html',
     name: 'moyo',
     expectedPath: '#main-product > div.tovar-tabs > div.tovar-tabs-content-list > ul > li.tovar-tabs-content.tovar-main-tab-content.tovar-tabs-content--active > div.tovar_maininfo > div.tovar_info.tovar-status-type--archive > div.tovar-info-price.tovar-info-price--archive.Roboto.tovar-info-price--without-pre-order-start-date > div.tovar-info-price-header > div',
-    expectedText: ['Товар закончился']
+    expectedText: ['Товар закінчився', 'Товар закончился']
   }
 ];
 
@@ -74,7 +74,7 @@ async function urlChecker({ url, name, expectedPath, expectedText }) {
     return null
   }
 
-  console.log(`${name.toUpperCase()} current: ${element} - expected: ${expectedText}`)
+  console.log(`${name.toUpperCase()} current: ${element} - expected: ${expectedText[0]} or ${expectedText[1]}`)
   if (!expectedText.includes(element)) {
     sendUpdate(name, url)
   }
