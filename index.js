@@ -27,6 +27,12 @@ const webSitesUrl = [
     name: 'moyo',
     expectedPath: '#main-product > div.tovar-tabs > div.tovar-tabs-content-list > ul > li.tovar-tabs-content.tovar-main-tab-content.tovar-tabs-content--active > div.tovar_maininfo > div.tovar_info.tovar-status-type--outofstock > div.tovar-info-price.tovar-info-price--outofstock.Roboto.tovar-info-price--without-pre-order-start-date > div.tovar-info-price-header.tovar-info-price-header--outofstock > div',
     expectedText: ['Немає в наявності', 'Нет в наличии', 'Товар закінчився', 'Товар закончился']
+  },
+  {
+    url: 'https://www.foxtrot.com.ua/ru/shop/igrovye_pristavki_sony_sony-ps5.html',
+    name: 'foxtrot',
+    expectedPath: '#anchor-1 > div > div > div.product-box__right > div > div.product-box__main > div > div.product-box__main-buy > div.button.buy-button.product-box__main-buy__button.product-preorder-button > p',
+    expectedText: ['Уведомить о наличии']
   }
 ];
 
