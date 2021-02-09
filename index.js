@@ -13,7 +13,7 @@ const webSitesUrl = [
   {
     url: 'https://rozetka.com.ua/playstation_5_digital_edition_2/p223596301/',
     name: 'rozetka',
-    expectedPath: 'body > app-root > div > div:nth-child(2) > app-rz-product > div > product-tab-main > div:nth-child(1) > div:nth-child(1) > div.product-about__right > product-main-info > ul > li:nth-child(1) > p',
+    expectedPath: 'body > app-root > div > div:nth-child(3) > app-rz-product > div > product-tab-main > div:nth-child(1) > div:nth-child(1) > div.product-about__right > product-main-info > ul > li:nth-child(1) > p',
     expectedText: ['Немає в наявності', 'Нет в наличии', 'Товар закінчився', 'Товар закончился']
   },
   {
