@@ -28,12 +28,6 @@ const webSitesUrl = [
     expectedPath: '#main-product > div.tovar-tabs > div.tovar-tabs-content-list > ul > li.tovar-tabs-content.tovar-main-tab-content.tovar-tabs-content--active > div.tovar_maininfo > div.tovar_info.tovar-status-type--archive > div.tovar-info-price.tovar-info-price--archive.Roboto.tovar-info-price--without-pre-order-start-date > div.tovar-info-price-header > div',
     expectedText: ['Немає в наявності', 'Нет в наличии', 'Товар закінчився', 'Товар закончился']
   },
-  {
-    url: 'https://www.moyo.ua/ua/igrovaya-pristavka-sony-playstation-5-digital-edition/468817.html',
-    name: 'moyo',
-    expectedPath: '#main-product > div.tovar-tabs > div.tovar-tabs-content-list > ul > li.tovar-tabs-content.tovar-main-tab-content.tovar-tabs-content--active > div.tovar_maininfo > div.tovar_info.tovar-status-type--archive > div.tovar-info-price.tovar-info-price--archive.Roboto.tovar-info-price--without-pre-order-start-date > div.tovar-info-price-header > div > div > span',
-    expectedText: ['Немає в наявності', 'Нет в наличии', 'Товар закінчився', 'Товар закончился']
-  },
 ];
 
 async function getElement(url, expectedPath) {
@@ -74,18 +68,27 @@ const sendUpdate = (name, url) => {
   );
 };
 
+const sendMissingUpdate = (name, url) => {
+  bot.sendMessage(
+    CHAT_ID,
+    `ON <b>${name}</b> EXPECTED ELEMENT WASN'T FOUNT, CHECK THIS LINK \n<a href="${url}">${url}</a>`,
+    { parse_mode: "HTML" }
+  );
+};
+
 async function urlChecker({ url, name, expectedPath, expectedText }) {
   const element = await getElement(url, expectedPath)
 
-  // if (element === null) {
-  //   console.error(`something crashed on ${name}, going for the next steps`)
-  //   return null
-  // }
+  if (!element) {
+    console.error(`something crashed on ${name}, going for the next steps`)
+    sendMissingUpdate(name, url)
+    return null
+  }
 
   console.log(`${name.toUpperCase()} current: ${element} - expected: ${expectedText[0]}/${expectedText[1]}/${expectedText[2]}/${expectedText[3]}`)
-  // if (!expectedText.includes(element)) {
-  //   sendUpdate(name, url)
-  // }
+  if (!expectedText.includes(element)) {
+    sendUpdate(name, url)
+  }
   return element
 };
 
