@@ -51,6 +51,8 @@ async function getElement(url, expectedPath) {
       await page.goto(url, { waitUntil: 'load', timeout: 20000 })
       const element = await page.$eval(expectedPath, el => el.textContent);
 
+      console.log('element', element)
+
       await page.close()
       await browser.close()
       return element.trim()
