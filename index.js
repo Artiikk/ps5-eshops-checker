@@ -7,6 +7,7 @@ const TelegramBot = require('node-telegram-bot-api');
 const TelegramBotToken = process.env.BOT_TOKEN;
 const bot = new TelegramBot(TelegramBotToken, { polling: { interval: 1000 } });
 const CHAT_ID = process.env.CHAT_ID;
+const CHAT_ID_ME = process.env.CHAT_ID_ME;
 const PORT = process.env.PORT || 5000;
 
 const webSitesUrl = [
@@ -66,11 +67,23 @@ const sendUpdate = (name, url) => {
     `ON <b>${name}</b> SOMETHING WAS CHANGED, CHECK THIS LINK \n<a href="${url}">${url}</a>`,
     { parse_mode: "HTML" }
   );
+
+  bot.sendMessage(
+    CHAT_ID_ME,
+    `ON <b>${name}</b> SOMETHING WAS CHANGED, CHECK THIS LINK \n<a href="${url}">${url}</a>`,
+    { parse_mode: "HTML" }
+  );
 };
 
 const sendMissingUpdate = (name, url) => {
   bot.sendMessage(
     CHAT_ID,
+    `ON <b>${name}</b> EXPECTED ELEMENT WASN'T FOUNT, CHECK THIS LINK \n<a href="${url}">${url}</a>`,
+    { parse_mode: "HTML" }
+  );
+  
+  bot.sendMessage(
+    CHAT_ID_ME,
     `ON <b>${name}</b> EXPECTED ELEMENT WASN'T FOUNT, CHECK THIS LINK \n<a href="${url}">${url}</a>`,
     { parse_mode: "HTML" }
   );
