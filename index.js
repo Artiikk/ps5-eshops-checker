@@ -28,6 +28,12 @@ const webSitesUrl = [
     expectedPath: '#main-product > div.tovar-tabs > div.tovar-tabs-content-list > ul > li.tovar-tabs-content.tovar-main-tab-content.tovar-tabs-content--active > div.tovar_maininfo > div.tovar_info.tovar-status-type--archive > div.tovar-info-price.tovar-info-price--archive.Roboto.tovar-info-price--without-pre-order-start-date > div.tovar-info-price-header > div',
     expectedText: ['Немає в наявності', 'Нет в наличии', 'Товар закінчився', 'Товар закончился']
   },
+  {
+    url: 'https://www.moyo.ua/ua/igrovaya-pristavka-sony-playstation-5-digital-edition/468817.html',
+    name: 'moyo',
+    expectedPath: '#main-product > div.tovar-tabs > div.tovar-tabs-content-list > ul > li.tovar-tabs-content.tovar-main-tab-content.tovar-tabs-content--active > div.tovar_maininfo > div.tovar_info.tovar-status-type--archive > div.tovar-info-price.tovar-info-price--archive.Roboto.tovar-info-price--without-pre-order-start-date > div.tovar-info-price-header > div > div > span',
+    expectedText: ['Немає в наявності', 'Нет в наличии', 'Товар закінчився', 'Товар закончился']
+  },
 ];
 
 async function getElement(url, expectedPath) {
