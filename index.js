@@ -43,7 +43,7 @@ async function getElement(url, expectedPath) {
     })
     const page = await browser.newPage()
     try {
-      await page.goto(url, { waitUntil: 'load', timeout: 20000 })
+      await page.goto(url, { waitUntil: 'load', timeout: 60000 })
       const element = await page.$eval(expectedPath, el => el.textContent);
 
       console.log('element', element)
