@@ -6,7 +6,7 @@ const schedule = require('node-schedule');
 const TelegramBot = require('node-telegram-bot-api');
 const TelegramBotToken = process.env.BOT_TOKEN;
 const bot = new TelegramBot(TelegramBotToken, { polling: { interval: 1000 } });
-const CHAT_ID = process.env.CHAT_ID;
+const CHAT_ID_VALERON = process.env.CHAT_ID_VALERON;
 const CHAT_ID_ME = process.env.CHAT_ID_ME;
 const PORT = process.env.PORT || 5000;
 
@@ -43,7 +43,7 @@ async function getElement(url, expectedPath) {
     })
     const page = await browser.newPage()
     try {
-      await page.goto(url, { waitUntil: 'load', timeout: 60000 })
+      await page.goto(url, { waitUntil: 'load', timeout: 0 })
       const element = await page.$eval(expectedPath, el => el.textContent);
 
       console.log('element', element)
@@ -63,7 +63,7 @@ async function getElement(url, expectedPath) {
 
 const sendUpdate = (name, url) => {
   bot.sendMessage(
-    CHAT_ID,
+    CHAT_ID_VALERON,
     `ON <b>${name}</b> SOMETHING WAS CHANGED, CHECK THIS LINK \n<a href="${url}">${url}</a>`,
     { parse_mode: "HTML" }
   );
@@ -77,7 +77,7 @@ const sendUpdate = (name, url) => {
 
 const sendMissingUpdate = (name, url) => {
   bot.sendMessage(
-    CHAT_ID,
+    CHAT_ID_VALERON,
     `ON <b>${name}</b> EXPECTED ELEMENT WASN'T FOUNT, CHECK THIS LINK \n<a href="${url}">${url}</a>`,
     { parse_mode: "HTML" }
   );
@@ -97,12 +97,12 @@ bot.on('message', (msg) => {
   // bot.sendMessage(chatId, 'Received your message');
 });
 
+// let errorsCounter = 0;
 async function urlChecker({ url, name, expectedPath, expectedText }) {
   const element = await getElement(url, expectedPath)
 
   if (!element) {
     console.error(`something crashed on ${name}, going for the next steps`)
-    sendMissingUpdate(name, url)
     return null
   }
 
