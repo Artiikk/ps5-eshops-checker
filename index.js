@@ -17,6 +17,12 @@ const webSitesUrl = [
     expectedPath: 'body > app-root > div > div:nth-child(3) > app-rz-product > div > product-tab-main > div:nth-child(1) > div:nth-child(1) > div.product-about__right > product-main-info > ul > li:nth-child(1) > p',
     expectedText: ['Немає в наявності', 'Нет в наличии', 'Товар закінчився', 'Товар закончился']
   },
+  {
+    url: 'https://rozetka.com.ua/ua/playstation_5/p223588825/?utm_source=from_app',
+    name: 'rozetka-disk',
+    expectedPath: '.product__status',
+    expectedText: ['Немає в наявності', 'Нет в наличии', 'Товар закінчився', 'Товар закончился']
+  },
   // {
   //   url: 'https://allo.ua/ru/igrovye-pristavki/konsol-playstation-5-digital-edition.html',
   //   name: 'allo',
@@ -27,6 +33,12 @@ const webSitesUrl = [
     url: 'https://www.moyo.ua/ua/igrovaya-pristavka-sony-playstation-5-digital-edition/468817.html',
     name: 'moyo',
     expectedPath: '#main-product > div.tovar-tabs > div.tovar-tabs-content-list > ul > li.tovar-tabs-content.tovar-main-tab-content.tovar-tabs-content--active > div.tovar_maininfo > div.tovar_info.tovar-status-type--archive > div.tovar-info-price.tovar-info-price--archive.Roboto.tovar-info-price--without-pre-order-start-date > div.tovar-info-price-header > div',
+    expectedText: ['Немає в наявності', 'Нет в наличии', 'Товар закінчився', 'Товар закончился']
+  },
+  {
+    url: 'https://www.moyo.ua/ua/igrovaya-pristavka-sony-playstation-5-digital-edition/468817.html',
+    name: 'moyo-disk',
+    expectedPath: '.tovar-status-text',
     expectedText: ['Немає в наявності', 'Нет в наличии', 'Товар закінчився', 'Товар закончился']
   },
 ];
