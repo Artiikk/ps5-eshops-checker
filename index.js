@@ -14,21 +14,15 @@ const webSitesUrl = [
   {
     url: 'https://rozetka.com.ua/playstation_5_digital_edition_2/p223596301/',
     name: 'rozetka',
-    expectedPath: 'body > app-root > div > div:nth-child(3) > app-rz-product > div > product-tab-main > div:nth-child(1) > div:nth-child(1) > div.product-about__right > product-main-info > ul > li:nth-child(1) > p',
+    expectedPath: '.status-label',
     expectedText: ['Немає в наявності', 'Нет в наличии', 'Товар закінчився', 'Товар закончился']
   },
   {
     url: 'https://rozetka.com.ua/ua/playstation_5/p223588825/?utm_source=from_app',
     name: 'rozetka-disk',
-    expectedPath: '.product__status',
+    expectedPath: '.status-label',
     expectedText: ['Немає в наявності', 'Нет в наличии', 'Товар закінчився', 'Товар закончился']
   },
-  // {
-  //   url: 'https://allo.ua/ru/igrovye-pristavki/konsol-playstation-5-digital-edition.html',
-  //   name: 'allo',
-  //   expectedPath: '#__layout > div > div.page__content.page__content--inverse > div.product-view > ul > li.product-basic-content.product-view-content__section > div.product-basic-content__data.main-data > div.main-data__trade.product-trade > div > div > p',
-  //   expectedText: ['Немає в наявності', 'Нет в наличии', 'Товар закінчився', 'Товар закончился']
-  // },
   {
     url: 'https://www.moyo.ua/ua/igrovaya-pristavka-sony-playstation-5-digital-edition/468817.html',
     name: 'moyo',
